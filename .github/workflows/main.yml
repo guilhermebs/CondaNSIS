@@ -25,7 +25,7 @@ jobs:
       - name: Create conda environment and run unit tests
         run: |
           call $CONDA\Scripts\activate
-          conda env create -f environment.yml -n condansis
+          call conda env create -f environment.yml -n condansis
         shell: cmd
         
       - name: Install condansis and run test
