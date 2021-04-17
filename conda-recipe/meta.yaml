@@ -1,0 +1,30 @@
+{% set data = load_setup_py_data() %}
+
+package:
+  name: condansis
+  version: {{ data.get('version') }}
+
+source:
+  path: ../src
+
+build:
+  noarch: python
+  number: 1
+  script: python -m pip install . --no-deps --ignore-installed
+
+requirements:
+     build:
+         - python
+     run:
+         - python
+         - jinja2
+         - nsis
+         - conda-pack>=0.5.0
+
+test:
+     imports:
+         - condansis
+
+about:
+  home: https://github.com/guilhermebs/condansis
+  summary: Build self-extracting installers for your python app

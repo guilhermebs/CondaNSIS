@@ -1,0 +1,8 @@
+name: test_pkg
+channels:
+  - defaults
+dependencies:
+  - python
+  - pip
+  - pip:
+    - black

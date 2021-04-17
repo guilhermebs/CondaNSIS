@@ -1,0 +1,64 @@
+variables:
+  isTag: $[startsWith(variables['Build.SourceBranch'], 'refs/tags/')]
+  conda_env: condansys-env
+
+trigger:
+  tags:
+    include:
+      - v*
+  branches:
+    include:
+      - master
+      - development
+      - feature/*
+      - hotfix/*
+
+jobs:
+  - job: Test
+    displayName: Run tests and build conda package
+    pool:
+      vmImage: windows-latest
+    steps:
+
+    - powershell: Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+      displayName: Add conda to PATH
+    
+    - script: conda env create -f environment.yml -n $(conda_env)
+      displayName: Create Anaconda environment
+
+    - script: |
+        call activate $(conda_env)
+        python -m pip install .\src
+      displayName: Install condansys
+
+    - script: |
+        call activate $(conda_env)
+        call conda install pytest --yes
+        python -m pytest --junitxml=test-results.xml .\src
+      displayName: Run pytest
+
+    - script: |
+        call activate $(conda_env)
+        python example\script\create_installer.py
+        start /wait "" install_snake-simulator-0.1.exe /S /D=%cd%\example_package_1
+        example_package_1\snake.lnk
+      displayName: Run example 1
+
+    - script: |
+        call activate $(conda_env)
+        python example\package\create_installer.py
+        start /wait "" install_snake-simulator-1.0.exe /S /D=%cd%\example_package_2
+        example_package_2\snake.lnk
+      displayName: Run example 2
+
+    - script: |
+        call activate $(conda_env)
+        call conda install conda-build
+        call conda build conda-recipe --channel conda-forge --channel defaults --output-folder build\conda
+        move build\conda\noarch\condansis-*.tar.bz2 "$(Build.ArtifactStagingDirectory)"
+      displayName: Build package
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'condansis-package'

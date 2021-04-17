@@ -1,0 +1,12 @@
+name: condansis
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - jinja2
+  - python
+  - conda-pack>=0.5
+  - nsis
+  - pytest
+  - sphinx
+  - numpydoc
