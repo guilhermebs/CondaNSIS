@@ -1,9 +1,6 @@
 
 name: Test and Release
 
-variables:
-  #isTag: $[startsWith(variables['Build.SourceBranch'], 'refs/tags/')]
-  conda_env: condansys-env
 
 on:
   push:
