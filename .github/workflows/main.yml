@@ -24,13 +24,13 @@ jobs:
       
       - name: Create conda environment and run unit tests
         run: |
-          call $CONDA\Scripts\activate
+          call %CONDA%\Scripts\activate
           call conda env create -f environment.yml -n condansis
         shell: cmd
         
       - name: Install condansis and run test
         run: |
-          call $CONDA\Scripts\activate condansis
+          call %CONDA%\Scripts\activate condansis
           call conda install pytest wheel
           python -m pip install .\src
           python -m pytest --junitxml=test-results.xml .\src
@@ -38,7 +38,7 @@ jobs:
         
       - name: Run script example 
         run: |
-          call $CONDA\Scripts\activate condansis
+          call %CONDA%\Scripts\activate condansis
           python example\script\create_installer.py
           start /wait "" install_snake-simulator-0.1.exe /S /D=%cd%\example_package_1
           example_package_1\snake.lnk
@@ -46,7 +46,7 @@ jobs:
         
       - name: Run package example 
         run: |
-          call $CONDA\Scripts\activate condansis
+          call %CONDA%\Scripts\activate condansis
           python example\package\create_installer.py
           start /wait "" install_snake-simulator-0.1.exe /S /D=%cd%\example_package_2
           example_package_2\snake.lnk
