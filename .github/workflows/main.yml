@@ -1,0 +1,35 @@
+
+name: Test and Release
+
+variables:
+  #isTag: $[startsWith(variables['Build.SourceBranch'], 'refs/tags/')]
+  conda_env: condansys-env
+
+on:
+  push:
+    branches:
+     - main
+     - feature/*
+     - hotfix/*
+  pull_request:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create conda environment and run unit tests
+        run: |
+          call $CONDA\Scripts\activate
+          conda env create -f environment.yml -n condansis
+          call activate condansis
+          python -m pip install .\src
+          python -m pytest --junitxml=test-results.xml .\src
+        shell: cmd
