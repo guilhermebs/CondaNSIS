@@ -26,7 +26,7 @@ setup(
     keywords="packaging, installer, windows",
     packages=find_packages(),
     python_requires=">=3.5, <4",
-    install_requires=["conda-pack==0.5", "jinja2"],
+    install_requires=["conda-pack>=0.5", "jinja2"],
     extras_require={
         "test": ["pytest"],
     },
