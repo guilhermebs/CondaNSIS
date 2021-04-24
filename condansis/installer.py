@@ -394,7 +394,7 @@ class Installer:
 
         >>> installer.add_shortcut(r"$INSTDIR\\python.lnk", "$PYTHON")
 
-        create a shortcut to execute a run_app.py, located in the scripts\ subfolder
+        create a shortcut to execute a run_app.py, located in the "scripts" subfolder
 
         >>> installer.add_shortcut(r"$INSTDIR\\app.lnk", "$PYTHON", "$INSTDIR\\scripts\\run_app.py")
         """

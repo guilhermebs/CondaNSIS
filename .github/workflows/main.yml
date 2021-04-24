@@ -34,8 +34,8 @@ jobs:
         run: |
           call %CONDA%\Scripts\activate condansis
           call conda install pytest wheel
-          python -m pip install .\src
-          python -m pytest --junitxml=test-results.xml .\src
+          python -m pip install .
+          python -m pytest --junitxml=test-results.xml condansis
         shell: cmd
         
       - name: Run script example 
@@ -69,12 +69,11 @@ jobs:
       
       - name: Build and upload to PyPI
         run: |
-          cd src
           source $CONDA/bin/activate condansis
           python -m pip install --upgrade setuptools wheel twine
           python setup.py bdist_wheel
           python setup.py sdist
-          #python -m twine upload --repository testpypi dist/*.whl -u __token__ -p "$TOKEN"
+          python -m twine upload --repository testpypi dist/*.whl -u __token__ -p "$TOKEN"
         env:
           TOKEN: ${{ secrets.PYPI_TOKEN }}
 
