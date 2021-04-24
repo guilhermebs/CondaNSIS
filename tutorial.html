@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorial &#8212; CondaNSIS 0.3 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="CondaNSIS" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial, we will show how to package a simple script with CondaNSIS to make it available on computers without conda installed.</p>
+<div class="section" id="creating-an-installer-for-a-script">
+<h2>Creating an installer for a script<a class="headerlink" href="#creating-an-installer-for-a-script" title="Permalink to this headline">¶</a></h2>
+<p>We want to distribute a script called <a class="reference download internal" download="" href="_downloads/01cb3bac50b670cd41eb1df69068a141/snake.py"><code class="xref download docutils literal notranslate"><span class="pre">snake.py</span></code></a>, performs the critical task of printing a snake in the terminal for 10 seconds.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="n">SNAKE</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                          ____</span>
+<span class="s2"> ________________________/ O  \___/</span>
+<span class="s2">&lt;_____________________________/   \</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">SNAKE</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We also have to define the environment for our script in a <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#sharing-an-environment">conda environment.yml file</a>.
+In our app, we use the <a class="reference download internal" download="" href="_downloads/d23fbfcbcfeedc87359e973864889033/environment.yml"><code class="xref download docutils literal notranslate"><span class="pre">environment.yml</span></code></a> file below.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">channels</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">defaults</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">python</span>
+</pre></div>
+</div>
+<p>Finally, we write some small <a class="reference download internal" download="" href="_downloads/68b93d6cded8ca6d7b8534de5e931b11/create_installer.py"><code class="xref download docutils literal notranslate"><span class="pre">script</span></code></a> to tell CondaNSIS how to put together the installer.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">condansis</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">this_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+
+    <span class="c1"># instantiate Installer</span>
+    <span class="n">installer</span> <span class="o">=</span> <span class="n">condansis</span><span class="o">.</span><span class="n">Installer</span><span class="p">(</span>
+        <span class="n">package_name</span><span class="o">=</span><span class="s2">&quot;snake-simulator&quot;</span><span class="p">,</span>
+        <span class="n">package_root</span><span class="o">=</span><span class="n">this_dir</span><span class="p">,</span>
+        <span class="n">package_version</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span><span class="p">,</span>
+        <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;snake.py&quot;</span><span class="p">],</span>
+        <span class="n">install_root_package</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># do not run pip install in the package root</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create a shortcut in the install directory to run</span>
+    <span class="c1"># $PYTHON $INSTDIR\snake.py</span>
+    <span class="c1"># where $PYTHON is the path to the interpreter after installation</span>
+    <span class="n">installer</span><span class="o">.</span><span class="n">add_shortcut</span><span class="p">(</span>
+        <span class="n">shortcut_name</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;$INSTDIR&quot;</span><span class="p">,</span> <span class="s2">&quot;snake.lnk&quot;</span><span class="p">),</span>
+        <span class="n">target_file</span><span class="o">=</span><span class="s2">&quot;$PYTHON&quot;</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;$INSTDIR&quot;</span><span class="p">,</span> <span class="s2">&quot;snake.py&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create the installer</span>
+    <span class="n">installer</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In this example, we are using 2 special variables:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">$INSTDIR</span></code> will be resolved to the full path to the installation directory. This and many other variables are standard in <a class="reference external" href="https://nsis.sourceforge.io/Docs/Chapter4.html#variables">NSIS</a>.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">$PYTHON</span></code> will give us the full path to the python interpreter. It is provided by CondaNSIS.</p></li>
+</ul>
+<p>Additionally, CondaNSIS also provides the variables:</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">$PYTHONW</span></code>: local <code class="file docutils literal notranslate"><span class="pre">pythonw.exe</span></code> interpreter in target machine.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">$ENV</span></code>: Name of conda environment folder in target machine.</p></li>
+</ul>
+<p>The <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a> documentation gives a complete description of the <code class="code docutils literal notranslate"><span class="pre">Installer</span></code> class and <code class="code docutils literal notranslate"><span class="pre">add_shortcut</span></code> method.</p>
+</div>
+<div class="section" id="creating-an-installer-for-a-package">
+<h2>Creating an installer for a package<a class="headerlink" href="#creating-an-installer-for-a-package" title="Permalink to this headline">¶</a></h2>
+<p>Development of our snake simulator package is coming along and we have now created a nice <a class="reference external" href="https://update-me">Python package</a>, sourced an icon, and structured it such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>package
+├── snake
+│ ├── __init__.py
+│ └── snake.py
+├── resources
+│ └── snake.ico
+├── setup.py
+└── environment.yml
+</pre></div>
+</div>
+<p>When installed using <code class="code docutils literal notranslate"><span class="pre">pip</span></code> or <code class="code docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span></code>, this package creates an entrypoint called <code class="file docutils literal notranslate"><span class="pre">snake.exe</span></code>. We now want to create an installer for our package which will give easy access to this entrypoint.
+For that, we write the <a class="reference download internal" download="" href="_downloads/581c979b47345c1a3115af91bcee426a/create_installer.py"><code class="xref download docutils literal notranslate"><span class="pre">Python</span> <span class="pre">script</span></code></a> below</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">condansis</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">this_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span>
+
+    <span class="c1"># instantiate Installer</span>
+    <span class="n">installer</span> <span class="o">=</span> <span class="n">condansis</span><span class="o">.</span><span class="n">Installer</span><span class="p">(</span>
+        <span class="n">package_name</span><span class="o">=</span><span class="s2">&quot;snake-simulator&quot;</span><span class="p">,</span>
+        <span class="n">package_root</span><span class="o">=</span><span class="n">this_dir</span><span class="p">,</span>
+        <span class="n">package_version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+        <span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;resources&quot;</span><span class="p">],</span>
+        <span class="n">icon</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;resources&quot;</span><span class="p">,</span> <span class="s2">&quot;snake.ico&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create a shortcut in the snake.exe entrypoint</span>
+    <span class="c1"># In the target computer, entrypoints can be found at</span>
+    <span class="c1"># $INSTDIR\$ENV\Scripts</span>
+    <span class="n">installer</span><span class="o">.</span><span class="n">add_shortcut</span><span class="p">(</span>
+        <span class="n">shortcut_name</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;$INSTDIR&quot;</span><span class="p">,</span> <span class="s2">&quot;snake.lnk&quot;</span><span class="p">),</span>
+        <span class="n">target_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;$INSTDIR&quot;</span><span class="p">,</span> <span class="s2">&quot;$ENV&quot;</span><span class="p">,</span> <span class="s2">&quot;Scripts&quot;</span><span class="p">,</span> <span class="s2">&quot;snake.exe&quot;</span><span class="p">),</span>
+        <span class="n">icon_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;$INSTDIR&quot;</span><span class="p">,</span> <span class="s2">&quot;resources&quot;</span><span class="p">,</span> <span class="s2">&quot;snake.ico&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create the installer</span>
+    <span class="n">installer</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">CondaNSIS</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">CondaNSIS</a></li>
+      <li>Next: <a href="api.html" title="next chapter">API</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Ørsted A/S.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/tutorial.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

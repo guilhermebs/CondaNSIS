@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API &#8212; CondaNSIS 0.3 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="api">
+<span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installer">
+<h2>Installer<a class="headerlink" href="#installer" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="condansis.Installer">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">condansis.</span></code><code class="sig-name descname"><span class="pre">Installer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">package_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_root</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_version</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">installer_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_install_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postinstall_python_scripts</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preuninstall_python_scripts</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">install_root_package</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nsis_template</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clean_instdir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">register_uninstaller</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compressor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'lzma'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">makensis_exe</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'makensis'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#condansis.Installer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines an installer for a Python package and its environment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>package_name: str</strong></dt><dd><p>Name of the package</p>
+</dd>
+<dt><strong>package_root: str or Path</strong></dt><dd><p>Path to the package root</p>
+</dd>
+<dt><strong>package_version: str (optional)</strong></dt><dd><p>Version of the package. Default: None</p>
+</dd>
+<dt><strong>installer_name: str or Path (optional)</strong></dt><dd><p>Name of the installer to output. Default: install_{package_name}-{package_version}.exe</p>
+</dd>
+<dt><strong>default_install_dir: str or Path (optional)</strong></dt><dd><p>Default install directory in target computer.
+Accepts <a class="reference external" href="https://nsis.sourceforge.io/Docs/Chapter4.html#variables">NSIS variables</a>
+Default: %USERPROFILE%\package_name</p>
+</dd>
+<dt><strong>include: list of str or Path (optional)</strong></dt><dd><p>List of directories and files to be included in the installer. Should be relative to package_root</p>
+</dd>
+<dt><strong>icon: str or Path (optional)</strong></dt><dd><p>Path to installer icon, relative to package_root</p>
+</dd>
+<dt><strong>postinstall_python_scripts: list of str (optional)</strong></dt><dd><p>List of commands to be run in Python on the target machine after installation.
+Accepts <a class="reference external" href="https://nsis.sourceforge.io/Docs/Chapter4.html#variables">NSIS variables</a></p>
+</dd>
+<dt><strong>preuninstall_python_scripts: list of str (optional)</strong></dt><dd><p>List of commands to be run in Python on the target machine before uninstall
+Accepts <a class="reference external" href="https://nsis.sourceforge.io/Docs/Chapter4.html#variables">NSIS variables</a></p>
+</dd>
+<dt><strong>env_file: str or Path (optional)</strong></dt><dd><p>YML file with app environment. Default: <code class="file docutils literal notranslate"><span class="pre">package_root/environment.yml</span></code></p>
+</dd>
+<dt><strong>install_root_package: bool (optional)</strong></dt><dd><p>Whether to run <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">package_root</span></code>. Default: True</p>
+</dd>
+<dt><strong>env_name: str (optional)</strong></dt><dd><p>Name of the python environment in the target machine. Default: {package_name}_env</p>
+</dd>
+<dt><strong>nsis_template: str or Path (optional)</strong></dt><dd><p>Path to Jinja2 NSIS template to be used. Defaults to the CondaNSIS default script</p>
+</dd>
+<dt><strong>clean_instdir: bool (optional)</strong></dt><dd><p>Whether to clean the install directory before installing new files. Default: False</p>
+</dd>
+<dt><strong>register_uninstaller: bool (optional)</strong></dt><dd><p>Whether to register the uninstaller to Windows’ “add or remove programs”. Default: True</p>
+</dd>
+<dt><strong>compressor: ‘zlib’, ‘bzip2’, or ‘lzma’ (optional)</strong></dt><dd><p>Compression algorithm to use. Default: lzma
+<a class="reference external" href="https://nsis.sourceforge.io/Reference/SetCompressor">See here for more information</a></p>
+</dd>
+<dt><strong>makensis_exe: str or Path (optional)</strong></dt><dd><p>Call to the makensis.exe executable. Defaults to “makensis”</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="condansis.Installer.create_temp_env">
+<code class="sig-name descname"><span class="pre">create_temp_env</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_prefix</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#condansis.Installer.create_temp_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a temporary environment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>env_prefix: Path</strong></dt><dd><p>Directory where the environment will be created</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="condansis.Installer.pack_temp_env">
+<code class="sig-name descname"><span class="pre">pack_temp_env</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">work_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">env_prefix</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_missing_files</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#condansis.Installer.pack_temp_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs conda-pack to create the packaged environment and unpack it in the working directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>work_dir: Path</strong></dt><dd><p>Working directory to create installer</p>
+</dd>
+<dt><strong>env_prefix: Path</strong></dt><dd><p>Directory with the conda environment</p>
+</dd>
+<dt><strong>ignore_missing_files: bool</strong></dt><dd><p>Ignore that files are missing that should be present in the conda environment as specified by the conda metadata.
+Default: True</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="condansis.Installer.remove_temp_env">
+<code class="sig-name descname"><span class="pre">remove_temp_env</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">env_prefix</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#condansis.Installer.remove_temp_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the temporary environment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>env_prefix: Path</strong></dt><dd><p>Directory with the conda environment</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Often times this function fails to remove some dlls. Investigate further</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="condansis.Installer.create_app_dir">
+<code class="sig-name descname"><span class="pre">create_app_dir</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">work_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#condansis.Installer.create_app_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies all include_files to the working directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>work_dir: Path</strong></dt><dd><p>Working directory to create installer</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="condansis.Installer.create_nsis_script">
+<code class="sig-name descname"><span class="pre">create_nsis_script</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">work_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pathlib.Path</span><a class="headerlink" href="#condansis.Installer.create_nsis_script" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the NSIS script based on the template</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>work_dir: Path</strong></dt><dd><p>Working directory to create installer</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>script_name: path</dt><dd><p>Path to the processed makensis script</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="condansis.Installer.run_nsis">
+<code class="sig-name descname"><span class="pre">run_nsis</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">script_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#condansis.Installer.run_nsis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs makensis to create the installer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>script_name: Path</strong></dt><dd><p>Path to processed NSIS script</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="condansis.Installer.create">
+<code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#condansis.Installer.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the installer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="condansis.Installer.add_shortcut">
+<code class="sig-name descname"><span class="pre">add_shortcut</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shortcut_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">icon_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#condansis.Installer.add_shortcut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new shortcut to be written by the installer</p>
+<p>For more information, please see <a class="reference external" href="https://nsis.sourceforge.io/Reference/CreateShortCut">this link</a></p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>shortcut_name: str or Path</strong></dt><dd><p>Full path to the shortcut in the target computer.
+Accepts <a class="reference external" href="https://nsis.sourceforge.io/Docs/Chapter4.htm#variables">NSIS variables</a></p>
+</dd>
+<dt><strong>target_file: str or Path</strong></dt><dd><p>Executable target for the shortcut, in target computer.
+Accepts <a class="reference external" href="https://nsis.sourceforge.io/Docs/Chapter4.htm#variables">NSIS variables</a> and</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>$PYTHON: local python interpreter in target machine</p></li>
+<li><p>$PYTHONW: local pythonw.exe interpreter in target machine</p></li>
+<li><p>$ENV: Name of python environment folder in target machine</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><strong>parameters: str (optional)</strong></dt><dd><p>Parameters for the execution of target_file. Default: “”</p>
+</dd>
+<dt><strong>icon_file: str or Path (optional)</strong></dt><dd><p>path to “.ico” file in target computer</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>create a shortcut to the python interpreter in the installation directory</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">installer</span><span class="o">.</span><span class="n">add_shortcut</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$INSTDIR</span><span class="se">\\</span><span class="s2">python.lnk&quot;</span><span class="p">,</span> <span class="s2">&quot;$PYTHON&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>create a shortcut to execute a run_app.py, located in the scriptssubfolder</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">installer</span><span class="o">.</span><span class="n">add_shortcut</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$INSTDIR</span><span class="se">\\</span><span class="s2">app.lnk&quot;</span><span class="p">,</span> <span class="s2">&quot;$PYTHON&quot;</span><span class="p">,</span> <span class="s2">&quot;$INSTDIR</span><span class="se">\\</span><span class="s2">scripts</span><span class="se">\\</span><span class="s2">run_app.py&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">CondaNSIS</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="tutorial.html" title="previous chapter">Tutorial</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Ørsted A/S.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
