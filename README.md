@@ -1,7 +1,9 @@
 CondaNSIS
 ==========
 
-CondaNSIS packages Python applications into self-extracting installers by leveraging both [conda-pack](https://conda.github.io/conda-pack/) and [NSIS](https://nsis.sourceforge.io/Main_Page).
+[![Test and Release](https://github.com/guilhermebs/CondaNSIS/actions/workflows/main.yml/badge.svg)](https://github.com/guilhermebs/CondaNSIS/actions/workflows/main.yml)
+
+[CondaNSIS](http://guilhermebs.github.io/condansis) packages Python applications into self-extracting installers for **Windows** by leveraging both [conda-pack](https://conda.github.io/conda-pack/) and [NSIS](https://nsis.sourceforge.io/Main_Page).
 
 This project is inspired by [PyNSIST](https://pynsist.readthedocs.io/en/latest/).
 
@@ -14,27 +16,15 @@ CondaNSIS solves this problem by packaging your Python app together with a **loc
 
 Installation
 ------------
-TODO
+CondaNSIS is avaliable through conda-forge
+
+```
+conda install -c conda-forge condansis
+```
 
 Usage
 ------
-TODO: Link to docs
-
-How it works
-------------
-CondaNSIS will:
-
-1. Create the conda environment described in the package's environment.yml in a temporary directory
-2. Isolate the environment using conda-pack
-3. Package the isolated environment together with any extra files in a self-extracting executable using NSIS
-
-
-FAQ
-----
-* Can I execute the installer silently without the GUI?
-    
-    Yes, just use the `/S` switch. Please refer to the [NSIS documentation](https://nsis.sourceforge.io/Docs/Chapter3.html) for more options
-
+Please see the [documentation page](http://guilhermebs.github.io/condansis)
 
 Developers
 -----------
