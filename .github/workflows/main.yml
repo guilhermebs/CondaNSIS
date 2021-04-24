@@ -5,9 +5,11 @@ name: Test and Release
 on:
   push:
     branches:
-     - main
-     - feature/*
-     - hotfix/*
+     - 'main'
+     - 'feature/*'
+     - 'hotfix/*'
+    tags:
+     - 'v*' 
   pull_request:
     branches:
       - main
@@ -16,12 +18,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  Test:
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Create conda environment and run unit tests
         run: |
           call %CONDA%\Scripts\activate
@@ -48,7 +50,50 @@ jobs:
         run: |
           call %CONDA%\Scripts\activate condansis
           python example\package\create_installer.py
-          start /wait "" install_snake-simulator-0.1.exe /S /D=%cd%\example_package_2
+          start /wait "" install_snake-simulator-1.0.exe /S /D=%cd%\example_package_2
           example_package_2\snake.lnk
         shell: cmd
         
+  Release:
+    needs: Test
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags') }}
+      
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Create conda environment
+        run: |
+          source $CONDA/bin/activate
+          conda env create -f environment.yml -n condansis
+      
+      - name: Build and upload to PyPI
+        run: |
+          cd src
+          source $CONDA/bin/activate condansis
+          python -m pip install --upgrade setuptools wheel twine
+          python setup.py bdist_wheel
+          python setup.py sdist
+          #python -m twine upload --repository testpypi dist/*.whl -u __token__ -p "$TOKEN"
+        env:
+          TOKEN: ${{ secrets.PYPI_TOKEN }}
+
+      - name: Compile docs
+        run: |
+          cd docs
+          source $CONDA/bin/activate condansis
+          conda list
+          make html
+        
+      - name: Commit documentation changes
+        run: |
+          git clone https://"$TOKEN"@github.com/guilhermebs/CondaNSIS.git --branch gh-pages --single-branch gh-pages
+          cp -r docs/_build/html/* gh-pages/
+          cd gh-pages
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update documentation" -a || true
+          git push
+        env:
+          TOKEN: ${{ secrets.GH_TOKEN }}
