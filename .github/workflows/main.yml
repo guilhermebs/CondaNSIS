@@ -64,7 +64,6 @@ jobs:
       
       - uses: conda-incubator/setup-miniconda@v2
         with:
-          activate-environment: condansis
           environment-file: environment.yml
       
       - name: Build and upload to PyPI
@@ -72,7 +71,6 @@ jobs:
           cd src
           conda info
           conda list
-          conda activate condansis
           python -m pip install --upgrade setuptools wheel twine
           python setup.py bdist_wheel
           python setup.py sdist
@@ -83,9 +81,8 @@ jobs:
       - name: Compile docs
         run: |
           cd docs
-          conda activate condansis
           make html
-          
+        
       - name: Commit documentation changes
         run: |
           git clone https://"$TOKEN"@github.com/guilhermebs/CondaNSIS.git --branch gh-pages --single-branch gh-pages
