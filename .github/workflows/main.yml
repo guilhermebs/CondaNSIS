@@ -70,7 +70,7 @@ jobs:
       - name: Build and upload to PyPI
         run: |
           cd src
-          conda activate condansis
+          activate condansis
           python -m pip install --upgrade setuptools wheel twine
           python setup.py bdist_wheel
           python setup.py sdist
@@ -81,7 +81,7 @@ jobs:
       - name: Compile docs
         run: |
           cd docs
-          conda activate condansis
+          activate condansis
           conda info
           conda list
           make html
