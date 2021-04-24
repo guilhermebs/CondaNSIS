@@ -62,11 +62,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - uses: actions/setup-python@v2
+      - uses: conda-incubator/setup-miniconda@v2
         with:
-          python-version: '3.9'
-          architecture: 'x64'
-
+          activate-environment: condansis
+          environment-file: environment.yml
+      
       - name: Build and upload to PyPI
         run: |
           cd src
@@ -81,7 +81,6 @@ jobs:
         run: |
           cd docs
           python -m pip install --upgrade sphinx numpydoc
-          make html
           
       - name: Commit documentation changes
         run: |
