@@ -64,13 +64,13 @@ jobs:
       
       - name: Create conda environment
         run: |
-          $CONDA/bin/activate
+          source $CONDA/bin/activate
           conda env create -f environment.yml -n condansis
       
       - name: Build and upload to PyPI
         run: |
           cd src
-          $CONDA/bin/activate condansis
+          source $CONDA/bin/activate condansis
           python -m pip install --upgrade setuptools wheel twine
           python setup.py bdist_wheel
           python setup.py sdist
@@ -81,7 +81,8 @@ jobs:
       - name: Compile docs
         run: |
           cd docs
-          $CONDA/bin/activate condansis
+          source $CONDA/bin/activate condansis
+          conda list
           make html
         
       - name: Commit documentation changes
