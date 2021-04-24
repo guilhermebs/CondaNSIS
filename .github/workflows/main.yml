@@ -5,9 +5,11 @@ name: Test and Release
 on:
   push:
     branches:
-     - main
-     - feature/*
-     - hotfix/*
+     - 'main'
+     - 'feature/*'
+     - 'hotfix/*'
+    tags:
+     - 'v*' 
   pull_request:
     branches:
       - main
@@ -16,12 +18,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  Test:
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
-      
+        if: ${{ startsWith(github.ref, 'refs/tags') }}
+
       - name: Create conda environment and run unit tests
         run: |
           call %CONDA%\Scripts\activate
@@ -48,7 +51,28 @@ jobs:
         run: |
           call %CONDA%\Scripts\activate condansis
           python example\package\create_installer.py
-          start /wait "" install_snake-simulator-0.1.exe /S /D=%cd%\example_package_2
+          start /wait "" install_snake-simulator-1.0.exe /S /D=%cd%\example_package_2
           example_package_2\snake.lnk
         shell: cmd
         
+  Release:
+    runs-on: ubuntu-latest
+    #if: ${{ startsWith(github.ref, 'refs/tags') }}
+      
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+          architecture: 'x64'
+
+      - name: Build and upload to PyPI
+        run: |
+          cd src
+          python setup.py bdist_wheel
+          python setup.py sdist
+          python -m pip install twine
+          python -m twine upload --repository testpypi .\dist\*.whl -u __token__ -p "$env:PASSWORD"
+        env:
+          PASSWORD: ${{ secrets.PYPI_TOKEN }}
