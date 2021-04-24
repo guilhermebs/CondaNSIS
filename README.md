@@ -1,14 +1,16 @@
 CondaNSIS
 ==========
 
-CondaNSIS is a solution to package Python applications into self-extracting installers by leveraging both [conda-pack](https://conda.github.io/conda-pack/) and [NSIS](https://nsis.sourceforge.io/Main_Page).
+CondaNSIS packages Python applications into self-extracting installers by leveraging both [conda-pack](https://conda.github.io/conda-pack/) and [NSIS](https://nsis.sourceforge.io/Main_Page).
+
 This project is inspired by [PyNSIST](https://pynsist.readthedocs.io/en/latest/).
 
 Why?
 ----
-PyInstaller is great for small apps, but it has problems packaging complex projects with many dependencies.
-However, deployment with conda can be difficult as environments are managed globally and [things can get very confusing](https://xkcd.com/1987/), especially if the application is deployed to users' computers and they have the added responsibility of managing their own environments.
-CondaNSIS solves this problem by providing a way to package your Python app together with a **local** and **isolated** Python environment, such that the target computer does not even need conda to run it!
+Bundlers such as [PyInstaller](https://www.pyinstaller.org/) are great for small apps, but often have problems packaging complex projects with many dependencies.
+Alternativelly, deployment with [Conda](https://docs.conda.io/en/latest/) can be difficult as as it requires an Anaconda or a Miniconda installation.
+
+CondaNSIS solves this problem by packaging your Python app together with a **local** and **isolated** Python environment, such that the target computer does not need neither Python nor a Conda already installed.
 
 Installation
 ------------
