@@ -9,10 +9,10 @@ version=open(os.path.join(here,"condansis", "_version.py")).readlines()[-1].spli
 setup(
     name="condansis",
     version=version,
-    description="Installers for Python packages using NSIS and Conda",
-    #long_description=open(os.path.join(here, "..", 'README.md')).read(), commented out for now
+    description="Create installers for Python packages using NSIS and Conda",
+    long_description=open(os.path.join(here, 'README.md')).read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/guilhermebs/condansis",
+    url="http://guilhermebs.github.io/condansis",
     author="Guilherme Saturnino",
     author_email="GUISA@orsted.dk",
     # For a list of valid classifiers, see https://pypi.org/classifiers/
