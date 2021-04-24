@@ -70,9 +70,9 @@ jobs:
       - name: Build and upload to PyPI
         run: |
           cd src
+          python -m pip install --upgrade setuptools wheel twine
           python setup.py bdist_wheel
           python setup.py sdist
-          python -m pip install twine
           python -m twine upload --repository testpypi .\dist\*.whl -u __token__ -p "$env:PASSWORD"
         env:
           PASSWORD: ${{ secrets.PYPI_TOKEN }}
