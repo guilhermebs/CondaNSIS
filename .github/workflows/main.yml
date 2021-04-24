@@ -80,7 +80,7 @@ jobs:
       - name: Compile docs
         run: |
           cd docs
-          python -m pip install --upgrade sphinx numpydoc
+          make html
           
       - name: Commit documentation changes
         run: |
