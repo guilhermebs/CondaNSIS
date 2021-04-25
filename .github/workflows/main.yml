@@ -71,9 +71,8 @@ jobs:
         run: |
           source $CONDA/bin/activate condansis
           python -m pip install --upgrade setuptools wheel twine
-          python setup.py bdist_wheel
           python setup.py sdist
-          python -m twine upload dist/*.whl -u __token__ -p "$TOKEN"
+          python -m twine upload dist/* -u __token__ -p "$TOKEN"
         env:
           TOKEN: ${{ secrets.PYPI_TOKEN }}
 
