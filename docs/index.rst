@@ -6,28 +6,26 @@
 CondaNSIS
 =====================================
 
-CondaNSIS packages your Python applications together with its conda environment into a self-extracting installer.
-It aims to be a reliable and flexible way to deploy Python apps to Windows computers without any Python interpreters or environment managers.
+CondaNSIS is a flexible and reliable way to deploy Python apps to **Windows** computers without any Python interpreters or environment managers.
 
+It packages your Python applications together with its conda environment into a self-extracting installer by using `conda-pack <https://conda.github.io/conda-pack/>`_ to package a conda environment and `NSIS <https://nsis.sourceforge.io/Main_Page>`_ to build a self-extracting installer.
+This project is inspired by `PyNSIST <https://pynsist.readthedocs.io/en/latest/>`_, with an added conda twist.
 
-Use cases
-----------
-* Creating an installer for a local Python application 
-* Deploying Python applications in a highly reproducible fashion
-* Archiving applications for full reproducibility
+Why?
+----
+Bundlers such as `PyInstaller <https://www.pyinstaller.org/>`_ are great for small apps, but often have problems packaging complex projects with many dependencies.
+Alternativelly, deployments with `Conda <https://docs.conda.io/en/latest/>`_ can be difficult as as it requires an Anaconda or a Miniconda installation.
+
+CondaNSIS solves this problem by packaging your Python app together with a **local** and **isolated** Python environment, such that the target computer does not need neither Python nor a Conda already installed.
+
 
 Installation
 -------------
 To install CondaNSIS with all required dependencies, install from the `conda-forge` channel
 
-.. code:
+.. code::
 
    conda install -c conda-forge condansis
-
-How does it work?
--------------------
-CondaNSIS uses `conda-pack <https://conda.github.io/conda-pack/>`_ to package a conda environment, and `NSIS <https://nsis.sourceforge.io/Main_Page>`_ to build a self-extracting installer with the environment, any additional files and post-install operations.
-This project is inspired by `PyNSIST <https://pynsist.readthedocs.io/en/latest/>`_, with an added conda twist.
 
 
 Documentation
@@ -38,3 +36,5 @@ Documentation
    
    tutorial
    api
+   limitations
+   changelog

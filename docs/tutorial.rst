@@ -36,7 +36,7 @@ The :ref:`API <api>` documentation gives a complete description of the :code:`In
 Creating an installer for a package
 -----------------------------------
 
-Development of our snake simulator package is coming along and we have now created a nice `Python package <https://update-me>`_, sourced an icon, and structured it such as:
+Development of our snake simulator package is coming along and we have now created a nice `Python package <https://github.com/guilhermebs/CondaNSIS/tree/main/example/package>`_, sourced an icon, and structured it such as:
 
 ::
 
