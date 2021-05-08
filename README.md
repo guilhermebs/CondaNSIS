@@ -3,7 +3,7 @@ CondaNSIS
 
 [![Test and Release](https://github.com/guilhermebs/CondaNSIS/actions/workflows/main.yml/badge.svg)](https://github.com/guilhermebs/CondaNSIS/actions/workflows/main.yml)
 
-[CondaNSIS](http://guilhermebs.github.io/condansis) packages Python applications into self-extracting installers for **Windows** by leveraging both [conda-pack](https://conda.github.io/conda-pack/) and [NSIS](https://nsis.sourceforge.io/Main_Page).
+[CondaNSIS](https://guilhermebs.github.io/CondaNSIS/) packages Python applications into self-extracting installers for **Windows** by leveraging both [conda-pack](https://conda.github.io/conda-pack/) and [NSIS](https://nsis.sourceforge.io/Main_Page).
 
 This project is inspired by [PyNSIST](https://pynsist.readthedocs.io/en/latest/).
 

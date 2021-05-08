@@ -12,7 +12,7 @@ setup(
     description="Create installers for Python packages using NSIS and Conda",
     long_description=open(os.path.join(here, 'README.md')).read(),
     long_description_content_type="text/markdown",
-    url="http://guilhermebs.github.io/condansis",
+    url="http://guilhermebs.github.io/CondaNSIS",
     author="Guilherme Saturnino",
     author_email="GUISA@orsted.dk",
     # For a list of valid classifiers, see https://pypi.org/classifiers/
