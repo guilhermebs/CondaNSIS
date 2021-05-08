@@ -33,7 +33,7 @@ jobs:
       - name: Install condansis and run test
         run: |
           call %CONDA%\Scripts\activate condansis
-          call conda install pytest wheel
+          call conda install pytest wheel python==3.8
           python -m pip install .
           python -m pytest --junitxml=test-results.xml condansis
         shell: cmd
@@ -75,23 +75,3 @@ jobs:
           python -m twine upload dist/* -u __token__ -p "$TOKEN"
         env:
           TOKEN: ${{ secrets.PYPI_TOKEN }}
-
-      - name: Compile docs
-        run: |
-          cd docs
-          source $CONDA/bin/activate condansis
-          conda list
-          make html
-        
-      - name: Commit documentation changes
-        run: |
-          git clone https://"$TOKEN"@github.com/guilhermebs/CondaNSIS.git --branch gh-pages --single-branch gh-pages
-          cp -r docs/_build/html/* gh-pages/
-          cd gh-pages
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Update documentation" -a || true
-          git push
-        env:
-          TOKEN: ${{ secrets.GH_TOKEN }}

@@ -18,19 +18,16 @@ Use cases
 
 Installation
 -------------
-TODO
+To install CondaNSIS with all required dependencies, install from the `conda-forge` channel
+
+.. code:
+
+   conda install -c conda-forge condansis
 
 How does it work?
 -------------------
 CondaNSIS uses `conda-pack <https://conda.github.io/conda-pack/>`_ to package a conda environment, and `NSIS <https://nsis.sourceforge.io/Main_Page>`_ to build a self-extracting installer with the environment, any additional files and post-install operations.
 This project is inspired by `PyNSIST <https://pynsist.readthedocs.io/en/latest/>`_, with an added conda twist.
-
-
-Requirements
--------------
-
-* Conda
-* Python 3
 
 
 Documentation

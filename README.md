@@ -24,7 +24,7 @@ conda install -c conda-forge condansis
 
 Usage
 ------
-Please see the [documentation page](http://guilhermebs.github.io/condansis)
+Please see the [documentation page](http://guilhermebs.github.io/CondaNSIS)
 
 Developers
 -----------

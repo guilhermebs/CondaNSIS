@@ -1,0 +1,42 @@
+name: Documentation
+
+
+on:
+  push:
+    branches:
+     - 'main'
+    tags:
+     - 'v*' 
+
+  workflow_dispatch:
+
+jobs:
+  Docs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Create conda environment
+        run: |
+          source $CONDA/bin/activate
+          conda env create -f environment.yml -n condansis
+      
+      - name: Compile docs
+        run: |
+          cd docs
+          source $CONDA/bin/activate condansis
+          make html
+        
+      - name: Commit documentation changes
+        run: |
+          git clone https://"$TOKEN"@github.com/guilhermebs/CondaNSIS.git --branch gh-pages --single-branch gh-pages
+          cp -r docs/_build/html/* gh-pages/
+          cd gh-pages
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update documentation" -a || true
+          git push
+        env:
+          TOKEN: ${{ secrets.GH_TOKEN }}
