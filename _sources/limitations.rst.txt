@@ -1,7 +1,7 @@
 Known Issues and Limitations
 ============================
 
-Conda NSIS does **not** support:
+CondaNSIS does **not** support:
 
 * `Environment variable settings <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#setting-environment-variables>`_.
 * Bundling files outside the package root.
