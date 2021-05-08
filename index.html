@@ -33,24 +33,21 @@
             
   <div class="section" id="condansis">
 <h1>CondaNSIS<a class="headerlink" href="#condansis" title="Permalink to this headline">¶</a></h1>
-<p>CondaNSIS packages your Python applications together with its conda environment into a self-extracting installer.
-It aims to be a reliable and flexible way to deploy Python apps to Windows computers without any Python interpreters or environment managers.</p>
-<div class="section" id="use-cases">
-<h2>Use cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Creating an installer for a local Python application</p></li>
-<li><p>Deploying Python applications in a highly reproducible fashion</p></li>
-<li><p>Archiving applications for full reproducibility</p></li>
-</ul>
+<p>CondaNSIS is a flexible and reliable way to deploy Python apps to <strong>Windows</strong> computers without any Python interpreters or environment managers.</p>
+<p>It packages your Python applications together with its conda environment into a self-extracting installer by using <a class="reference external" href="https://conda.github.io/conda-pack/">conda-pack</a> to package a conda environment and <a class="reference external" href="https://nsis.sourceforge.io/Main_Page">NSIS</a> to build a self-extracting installer.
+This project is inspired by <a class="reference external" href="https://pynsist.readthedocs.io/en/latest/">PyNSIST</a>, with an added conda twist.</p>
+<div class="section" id="why">
+<h2>Why?<a class="headerlink" href="#why" title="Permalink to this headline">¶</a></h2>
+<p>Bundlers such as <a class="reference external" href="https://www.pyinstaller.org/">PyInstaller</a> are great for small apps, but often have problems packaging complex projects with many dependencies.
+Alternativelly, deployments with <a class="reference external" href="https://docs.conda.io/en/latest/">Conda</a> can be difficult as as it requires an Anaconda or a Miniconda installation.</p>
+<p>CondaNSIS solves this problem by packaging your Python app together with a <strong>local</strong> and <strong>isolated</strong> Python environment, such that the target computer does not need neither Python nor a Conda already installed.</p>
 </div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>To install CondaNSIS with all required dependencies, install from the <cite>conda-forge</cite> channel</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">condansis</span>
+</pre></div>
 </div>
-<div class="section" id="how-does-it-work">
-<h2>How does it work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h2>
-<p>CondaNSIS uses <a class="reference external" href="https://conda.github.io/conda-pack/">conda-pack</a> to package a conda environment, and <a class="reference external" href="https://nsis.sourceforge.io/Main_Page">NSIS</a> to build a self-extracting installer with the environment, any additional files and post-install operations.
-This project is inspired by <a class="reference external" href="https://pynsist.readthedocs.io/en/latest/">PyNSIST</a>, with an added conda twist.</p>
 </div>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
@@ -58,6 +55,8 @@ This project is inspired by <a class="reference external" href="https://pynsist.
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="limitations.html">Known Issues and Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 </div>
 </div>
@@ -83,6 +82,8 @@ This project is inspired by <a class="reference external" href="https://pynsist.
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="limitations.html">Known Issues and Limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
 <div class="relations">
