@@ -3,11 +3,14 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  # required for CondaNSIS
   - jinja2
   - python
   - conda-pack>=0.5
   - nsis
+  # testing and docs
   - pytest
   - sphinx
   - numpydoc
-
+  - wheel
+  - pip

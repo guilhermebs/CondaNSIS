@@ -33,7 +33,6 @@ jobs:
       - name: Install condansis and run test
         run: |
           call %CONDA%\Scripts\activate condansis
-          call conda install pytest wheel python==3.8
           python -m pip install .
           python -m pytest --junitxml=test-results.xml condansis
         shell: cmd
