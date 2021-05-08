@@ -21,7 +21,7 @@ CondaNSIS solves this problem by packaging your Python app together with a **loc
 
 Installation
 -------------
-To install CondaNSIS with all required dependencies, install from the `conda-forge` channel
+To install CondaNSIS with all required dependencies, get it from the `conda-forge` channel
 
 .. code::
 
