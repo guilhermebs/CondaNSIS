@@ -7,3 +7,4 @@ CondaNSIS does **not** support:
 * Bundling files outside the package root.
 * Copying files to outside the installation directory (can be done in a post-processing step).
 * Conda `activate scripts <https://docs.conda.io/projects/conda-build/en/latest/resources/activate-scripts.html>`_.
+* CondaNSIS does not run from Powershell

@@ -24,7 +24,7 @@ conda install -c conda-forge condansis
 
 Usage
 ------
-Please see the [documentation page](http://guilhermebs.github.io/CondaNSIS)
+Please see the [documentation page](http://guilhermebs.github.io/CondaNSIS). Due to limitations of the NSIS dependency, **CondaNSIS does not run from Powershell**.
 
 Developers
 -----------
