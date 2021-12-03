@@ -12,6 +12,7 @@ import conda_pack
 
 SITECUSTOMIZE = (Path(__file__).parent / "sitecustomize.py").resolve()
 NSIS_TEMPLATE = (Path(__file__).parent / "installer_template.nsi").resolve()
+CONDANSIS_UNPACK = (Path(__file__).parent / "condansis-unpack.py").resolve()
 
 try:
     CONDA_EXE = os.environ["CONDA_EXE"]
@@ -61,7 +62,7 @@ class Installer:
 
     installer_name: str or Path (optional)
         Name of the installer to output. Default: install_{package_name}-{package_version}.exe
-    
+
     default_install_dir: str or Path (optional)
         Default install directory in target computer.
         Accepts `NSIS variables <https://nsis.sourceforge.io/Docs/Chapter4.html#variables>`_
@@ -269,6 +270,23 @@ class Installer:
             )
         finally:
             packed_env.unlink()
+
+        # this should be removed once the PR https://github.com/conda/conda-pack/pull/190 is merged
+        # Create the unpack script
+        with open(CONDANSIS_UNPACK, "r") as f:
+            condansis_unpack = f.read()
+        with open(work_dir / self.env_name / "Scripts" / "conda-unpack-script.py", "r") as f:
+            conda_unpack = f.read()
+
+        # edit file
+        _prefix_record_starts = conda_unpack.find("_prefix_records")
+        if _prefix_record_starts == -1:
+            raise IOError("Invalid conda-pack-script.py")
+        condansis_unpack += "\n\n" + conda_unpack[_prefix_record_starts:]
+
+        # write out
+        with open(work_dir / self.env_name / "Scripts" / "condansis-unpack.py", "w") as f:
+            f.write(condansis_unpack)
 
     def remove_temp_env(self, env_prefix: Path) -> None:
         """ Removes the temporary environment

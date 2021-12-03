@@ -69,8 +69,8 @@ class TestInstaller:
                 shutil.make_archive(
                     str(packed_env)[:-4],
                     "tar",
-                    TEST_FILES_DIR,
-                    TEST_FILES_DIR,
+                    os.path.join(TEST_FILES_DIR, "package_env"),
+                    ".",
                 )
 
         def mock_from_prefix(*args, **kwargs):
