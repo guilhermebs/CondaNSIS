@@ -100,7 +100,8 @@ Section "!${PRODUCT_NAME}" sec_app
         File "{{ fn }}"
   {% endfor %}
 
-  nsExec::ExecToLog '$PYTHON "$INSTDIR\$ENV\Scripts\conda-unpack-script.py"'
+  nsExec::ExecToLog '$PYTHON "$INSTDIR\$ENV\Scripts\condansis-unpack.py"'
+
   ; Run Scripts
   {% for script in installer.postinstall_python_scripts %}
     nsExec::ExecToLog '"$PYTHON" {{ script }}'
