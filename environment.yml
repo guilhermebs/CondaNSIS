@@ -5,7 +5,7 @@ channels:
 dependencies:
   # required for CondaNSIS
   - jinja2
-  - python
+  - python>=3.8
   - conda-pack>=0.5
   - nsis
   # testing and docs

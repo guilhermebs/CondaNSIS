@@ -1,7 +1,7 @@
 CondaNSIS
 ==========
 
-[![Test and Release](https://github.com/guilhermebs/CondaNSIS/actions/workflows/main.yml/badge.svg)](https://github.com/guilhermebs/CondaNSIS/actions/workflows/main.yml) [![Conda Recipe](https://img.shields.io/badge/recipe-condansis-green.svg)](https://anaconda.org/conda-forge/condansis)
+[![Test and Release](https://github.com/guilhermebs/CondaNSIS/actions/workflows/main.yml/badge.svg)](https://github.com/guilhermebs/CondaNSIS/actions/workflows/main.yml) [![Conda Recipe](https://img.shields.io/badge/recipe-condansis-green.svg)](https://anaconda.org/conda-forge/condansis)[![](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/) 
 
 [CondaNSIS](https://guilhermebs.github.io/CondaNSIS/) packages Python applications into self-extracting installers for **Windows** by leveraging both [conda-pack](https://conda.github.io/conda-pack/) and [NSIS](https://nsis.sourceforge.io/Main_Page).
 
@@ -28,4 +28,4 @@ Please see the [documentation page](http://guilhermebs.github.io/CondaNSIS). Due
 
 Developers
 -----------
-Guilherme Bicalho Saturnino (guisa@orsted.dk)
+Guilherme Bicalho Saturnino (guisa@orsted.com)
