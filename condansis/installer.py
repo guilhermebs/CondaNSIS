@@ -228,11 +228,11 @@ class Installer:
             # run pip install on the root package directory
             subprocess.run(
                 [
-                    env_prefix / "python.exe",
+                    str(env_prefix / "python.exe"),
                     "-m",
                     "pip",
                     "install",
-                    self.package_root,
+                    str(self.package_root),
                     "--no-warn-script-location",
                 ],
                 check=True,
@@ -360,22 +360,22 @@ class Installer:
         """
         logging.info("Running makensis")
         subprocess.run(
-            [self.makensis_exe, script_name], check=True,
+            [str(self.makensis_exe), str(script_name)], check=True,
         )
 
     def create(self) -> None:
         """ Creates the installer """
         with tempfile.TemporaryDirectory() as work_dir:
-            work_dir = Path(work_dir)
+            work_dir_path = Path(work_dir)
             env_dir = Path(tempfile.mkdtemp())
             env_prefix = env_dir / self.env_name
             self.create_temp_env(env_prefix)
-            self.pack_temp_env(work_dir, env_prefix)
+            self.pack_temp_env(work_dir_path, env_prefix)
             shutil.rmtree(env_dir, ignore_errors=True)
             if env_dir.is_dir():
                 logging.warning(f"Could not remove temporary directory: {env_dir}")
-            self.create_app_dir(work_dir)
-            nsis_script = self.create_nsis_script(work_dir)
+            self.create_app_dir(work_dir_path)
+            nsis_script = self.create_nsis_script(work_dir_path)
             self.run_nsis(nsis_script)
             logging.info(f"Installer created at {self.installer_name}")
 
