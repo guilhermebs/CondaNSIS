@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Tutorial &#8212; CondaNSIS 0.3.4 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -12,6 +12,7 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -34,10 +35,10 @@
           <div class="body" role="main">
             
   <section id="tutorial">
-<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading">¶</a></h1>
 <p>In this tutorial, we will show how to package a simple script with CondaNSIS to make it available on computers without conda installed.</p>
 <section id="creating-an-installer-for-a-script">
-<h2>Creating an installer for a script<a class="headerlink" href="#creating-an-installer-for-a-script" title="Permalink to this headline">¶</a></h2>
+<h2>Creating an installer for a script<a class="headerlink" href="#creating-an-installer-for-a-script" title="Permalink to this heading">¶</a></h2>
 <p>We want to distribute a script called <a class="reference download internal" download="" href="_downloads/01cb3bac50b670cd41eb1df69068a141/snake.py"><code class="xref download docutils literal notranslate"><span class="pre">snake.py</span></code></a>, that prints a snake in the terminal for 10 seconds.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 
@@ -102,7 +103,7 @@
 <p>The <a class="reference internal" href="api.html#api"><span class="std std-ref">API</span></a> documentation gives a complete description of the <a class="reference internal" href="api.html#condansis.Installer" title="condansis.Installer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Installer</span></code></a> class and <a class="reference internal" href="api.html#condansis.Installer.add_shortcut" title="condansis.Installer.add_shortcut"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_shortcut</span></code></a> method.</p>
 </section>
 <section id="creating-an-installer-for-a-package">
-<h2>Creating an installer for a package<a class="headerlink" href="#creating-an-installer-for-a-package" title="Permalink to this headline">¶</a></h2>
+<h2>Creating an installer for a package<a class="headerlink" href="#creating-an-installer-for-a-package" title="Permalink to this heading">¶</a></h2>
 <p>Development of our snake simulator package is coming along and we have now created a nice <a class="reference external" href="https://github.com/guilhermebs/CondaNSIS/tree/main/example/package">Python package</a>, sourced an icon, and structured it such as:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>package
 ├── snake
@@ -189,7 +190,7 @@ For that, we write the <a class="reference download internal" download="" href="
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
 
 
 
@@ -206,7 +207,7 @@ For that, we write the <a class="reference download internal" download="" href="
       &copy;2021, Ørsted A/S.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
