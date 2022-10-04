@@ -54,3 +54,13 @@ When installed using :code:`pip` or :code:`python setup.py`, this package create
 For that, we write the :download:`Python script <../example/package/create_installer.py>` below
 
 .. literalinclude:: ../example/package/create_installer.py
+
+
+Using Conda-lock files
+--------------------------
+
+As an alternative to environment.yml files, CondaNSIS 0.4 added support for `conda-lock <https://github.com/conda-incubator/conda-lock>`_.
+To use conda-lock environment files, just define an :code:`env_file` argument pointing to the :file:`.lock` file and set
+:code:`conda_command="conda"`.
+
+.. literalinclude:: ../example/script/create_installer_conda_lock.py
