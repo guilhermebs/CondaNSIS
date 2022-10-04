@@ -45,21 +45,21 @@ jobs:
           example_package_1\snake.lnk
         shell: cmd
 
-    - name: Run script example with conda-lock file
-      run: |
-        call %CONDA%\Scripts\activate condansis
-        python example\script\create_installer_conda_lock.py
-        start /wait "" install_snake-simulator-1.0.exe /S /D=%cd%\example_package_2
-        example_package_2\snake.lnk
-      shell: cmd
-
-    - name: Run package example
-      run: |
+      - name: Run script example with conda-lock file
+        run: |
           call %CONDA%\Scripts\activate condansis
-          python example\package\create_installer.py
-          start /wait "" install_snake-simulator-1.0.exe /S /D=%cd%\example_package_3
-          example_package_3\snake.lnk
-      shell: cmd
+          python example\script\create_installer_conda_lock.py
+          start /wait "" install_snake-simulator-1.0.exe /S /D=%cd%\example_package_2
+          example_package_2\snake.lnk
+        shell: cmd
+
+      - name: Run package example
+        run: |
+            call %CONDA%\Scripts\activate condansis
+            python example\package\create_installer.py
+            start /wait "" install_snake-simulator-1.0.exe /S /D=%cd%\example_package_3
+            example_package_3\snake.lnk
+        shell: cmd
 
   Release:
     needs: Test
