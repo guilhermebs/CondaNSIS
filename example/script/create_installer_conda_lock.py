@@ -12,10 +12,10 @@ if __name__ == "__main__":
     installer = condansis.Installer(
         package_name="snake-simulator",
         package_root=this_dir,
-        package_version="0.1",
+        package_version="0.2",
         include=["snake.py"],
         install_root_package=False,  # do not run pip install in the package root
-        env_file="conda-win-64.lock",
+        env_file=os.path.join(this_dir, "conda-win-64.lock"),
         conda_command="conda"  # To use a conda-lock file, we need to overwrite the default ("conda-env")
     )
 
