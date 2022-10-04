@@ -83,7 +83,7 @@ class Installer:
         Accepts `NSIS variables <https://nsis.sourceforge.io/Docs/Chapter4.html#variables>`_
 
     env_file: str or Path (optional)
-        YML file with app environment. Default: :file:`package_root/environment.yml`
+        file defining app environment. Default: :file:`package_root/environment.yml`
 
     install_root_package: bool (optional)
         Whether to run :code:`pip install package_root`. Default: True
@@ -106,6 +106,11 @@ class Installer:
 
     makensis_exe: str or Path (optional)
         Call to the makensis.exe executable. Defaults to "makensis"
+
+    conda_command: "conda-env" or "conda" (optional)
+        Command to install conda environment. Two options are supported:
+            "conda-env": uses conda-env, with support for conda YML files (default)
+            "conda": uses conda, with support for conda-lock and requirements.txt files
     """
 
     def __init__(
@@ -127,6 +132,7 @@ class Installer:
         register_uninstaller: bool = True,
         compressor: str = "lzma",
         makensis_exe: Union[str, Path] = "makensis",
+        conda_command: str = "conda-env"
     ) -> None:
 
         self.package_name = package_name
@@ -178,10 +184,14 @@ class Installer:
             self.nsis_template = nsis_template
 
         if compressor not in ["zlib", "bzip2", "lzma"]:
-            raise ValueError(f"Compressor must be 'zlib', 'bzip2' or 'lzma'. Got: {compressor}")
+            raise ValueError(f"compressor must be 'zlib', 'bzip2' or 'lzma'. Got: {compressor}")
+
+        if conda_command not in ["conda", "conda-env"]:
+            raise ValueError(f"conda_command must be 'conda' or 'conda-env'. Got: {conda_command}")
 
         self.compressor = compressor
         self.install_root_package = install_root_package
+        self._conda_command = conda_command
 
         self.makensis_exe = makensis_exe
 
@@ -217,10 +227,19 @@ class Installer:
             Directory where the environment will be created
         """
         # Create a temporary environment in a temp folder
-        subprocess.run(
-            [CONDA_EXE, "env", "create", "-p", env_prefix, "-f", self.env_file, "--force"],
-            check=True,
-        )
+        if self._conda_command == "conda-env":
+            subprocess.run(
+                [CONDA_EXE, "env", "create", "-p", env_prefix, "-f", self.env_file, "--force"],
+                check=True,
+            )
+        elif self._conda_command == "conda":
+            subprocess.run(
+                [CONDA_EXE, "create", "-p", env_prefix, "--file", self.env_file],
+                check=True,
+            )
+        else:
+            raise ValueError(f"Invalid value for conda_command: {self.conda_command}")
+
         # Move sitecustomize.py
         shutil.copy(SITECUSTOMIZE, env_prefix / "Lib" / "site-packages")
 
@@ -250,7 +269,7 @@ class Installer:
 
         env_prefix: Path
             Directory with the conda environment
-        
+
         ignore_missing_files: bool
             Ignore that files are missing that should be present in the conda environment as specified by the conda metadata.
             Default: True
