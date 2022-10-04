@@ -49,7 +49,7 @@ jobs:
         run: |
           call %CONDA%\Scripts\activate condansis
           python example\script\create_installer_conda_lock.py
-          start /wait "" install_snake-simulator-1.0.exe /S /D=%cd%\example_package_2
+          start /wait "" install_snake-simulator-0.1.exe /S /D=%cd%\example_package_2
           example_package_2\snake.lnk
         shell: cmd
 
