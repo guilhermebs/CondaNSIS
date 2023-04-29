@@ -28,4 +28,4 @@ Please see the [documentation page](http://guilhermebs.github.io/CondaNSIS). Due
 
 Developers
 -----------
-Guilherme Bicalho Saturnino (guisa@orsted.com)
+Guilherme Bicalho Saturnino
